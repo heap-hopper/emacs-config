@@ -26,7 +26,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(lsp-pascal dart-mode lsp-dart lsp-treemacs flycheck company lsp-ui hover)))
+   '(plantuml-mode dart-mode lsp-dart lsp-treemacs flycheck company lsp-ui hover)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -113,3 +113,12 @@
 ;; Experimental
 (use-package lsp-pascal
   :hook (pascal-mode . lsp-deferred))
+
+;; TODO Plantuml
+(use-package plantuml-mode
+  :mode "\\.plantuml\\'")
+(setq plantuml-jar-path "~/plantuml.jar")
+(setq plantuml-default-exec-mode 'jar)
+(setq plantuml-output-type "png")
+
+(auto-image-file-mode 1)

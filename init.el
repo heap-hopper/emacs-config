@@ -1,12 +1,21 @@
-(setq inhibit-startup-message t
-      visible-bell t)
+(setq inhibit-startup-message t)
+(setq visible-bell nil)
+(setq ring-bell-function 'ignore)
 
+;; ui settings
 (tool-bar-mode -1)
-
 (scroll-bar-mode -1)
-
-(global-display-line-numbers-mode 1)
 (set-fringe-mode 10)
+(global-display-line-numbers-mode 1)
+(load-theme 'wombat)
+
+;; backup files
+(setq make-backup-files nil
+      auto-save-default t)
+
+;; font config
+(set-face-attribute 'default nil :height 210)
+(set-face-attribute 'default nil :font "agave Nerd Font Mono")
 
 (setq mac-command-modifier 'meta)
 
@@ -26,7 +35,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(plantuml-mode dart-mode lsp-dart lsp-treemacs flycheck company lsp-ui hover)))
+   '(eglot dart-mode lsp-dart lsp-treemacs flycheck company lsp-ui hover)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -122,3 +131,17 @@
 (setq plantuml-output-type "png")
 
 (auto-image-file-mode 1)
+
+(use-package vterm
+  :ensure t)
+
+;; Yaml support
+(use-package yaml-mode)
+
+;; C, C++ and Objective-C suppor
+(use-package eglot
+  :ensure t)
+
+(add-to-list 'eglot-server-programs '((c++mode c-mode) "clangd"))
+(add-hook 'c-mode-hook 'eglot-ensure)
+(add-hook 'c++-mode-hook 'eglot-ensure)

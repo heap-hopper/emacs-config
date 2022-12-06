@@ -10,14 +10,17 @@
 (load-theme 'wombat)
 
 ;; backup files
-(setq make-backup-files nil
-      auto-save-default t)
+(setq make-backup-files nil)
+(setq auto-save-default t)
 
 ;; font config
 (set-face-attribute 'default nil :height 210)
 (set-face-attribute 'default nil :font "agave Nerd Font Mono")
 
+;; macos keys 
 (setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'none)
+(setq default-input-method "MacOSX")
 
 (require 'package)
 
@@ -35,7 +38,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(eglot dart-mode lsp-dart lsp-treemacs flycheck company lsp-ui hover)))
+   '(magit dart-mode lsp-dart lsp-treemacs flycheck company lsp-ui hover)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -138,10 +141,17 @@
 ;; Yaml support
 (use-package yaml-mode)
 
-;; C, C++ and Objective-C suppor
+;; C, C++ and Objective-C support
 (use-package eglot
   :ensure t)
 
 (add-to-list 'eglot-server-programs '((c++mode c-mode) "clangd"))
 (add-hook 'c-mode-hook 'eglot-ensure)
 (add-hook 'c++-mode-hook 'eglot-ensure)
+
+;; Latex support
+(use-package latex-preview-pane)
+(latex-preview-pane-enable)
+
+;; Magit Support
+(use-package magit)
